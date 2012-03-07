@@ -24,6 +24,7 @@ import org.apache.cassandra.thrift.ColumnDef;
 
 import com.netflix.astyanax.ddl.ColumnDefinition;
 import com.netflix.astyanax.ddl.ColumnFamilyDefinition;
+import java.util.Map;
 
 public class ThriftColumnFamilyDefinitionImpl implements ColumnFamilyDefinition {
 	private final CfDef cfDef;
@@ -61,35 +62,7 @@ public class ThriftColumnFamilyDefinitionImpl implements ColumnFamilyDefinition 
 	public String getKeyspace() {
 		return cfDef.getKeyspace();
 	}
-	
-	@Override
-	public ColumnFamilyDefinition setMemtableFlushAfterMins(int value) {
-		cfDef.setMemtable_flush_after_mins(value);
-		return this;
-	}
 
-	@Override
-	public int getMemtableFlushAfterMins() {
-		return cfDef.getMemtable_flush_after_mins();
-	}
-	
-	@Override
-	public ColumnFamilyDefinition setMemtableOperationsInMillions(double value) {
-		cfDef.setMemtable_operations_in_millions(value);
-		return this;
-	}
-	
-	@Override
-	public double getMemtableOperationsInMillions() {
-		return cfDef.getMemtable_operations_in_millions();
-	}
-	
-	@Override
-	public ColumnFamilyDefinition setMemtableThroughputInMb(int value) {
-		cfDef.setMemtable_throughput_in_mb(value);
-		return this;
-	}
-	
 	@Override
 	public ColumnFamilyDefinition setMergeShardsChance(double value) {
 		cfDef.setMerge_shards_chance(value);
@@ -240,11 +213,6 @@ public class ThriftColumnFamilyDefinitionImpl implements ColumnFamilyDefinition 
 	}
 
 	@Override
-	public int getMemtableThroughputInMb() {
-		return cfDef.memtable_throughput_in_mb;
-	}
-
-	@Override
 	public double getMergeShardsChance() {
 		return cfDef.merge_shards_chance;
 	}
@@ -252,6 +220,17 @@ public class ThriftColumnFamilyDefinitionImpl implements ColumnFamilyDefinition 
 	@Override
 	public int getMinCompactionThreshold() {
 		return cfDef.min_compaction_threshold;
+	}
+
+	@Override
+	public ColumnFamilyDefinition setMaxCompactionThreshold(int value) {
+		cfDef.setMax_compaction_threshold(value);
+		return this;
+	}
+
+	@Override
+	public int getMaxCompactionThreshold() {
+		return cfDef.max_compaction_threshold;
 	}
 
 	@Override
@@ -289,4 +268,50 @@ public class ThriftColumnFamilyDefinitionImpl implements ColumnFamilyDefinition 
 	public ColumnDefinition makeColumnDefinition() {
 		return new ThriftColumnDefinitionImpl();
 	}
+
+    @Override
+    public ColumnFamilyDefinition setCompactionStrategy(String compactionStrategy) {
+        cfDef.setCompaction_strategy(compactionStrategy);
+        return this;
+    }
+
+    @Override
+    public String getCompactionStrategy() {
+        return cfDef.getCompaction_strategy();
+    }
+
+    @Override
+    public ColumnFamilyDefinition setCompactionStrategyOptions(
+            Map<String, String> compactionStrategyOptions) {
+        cfDef.setCompaction_strategy_options(compactionStrategyOptions);
+        return this;
+    }
+
+    @Override
+    public Map<String, String> getCompactionStrategyOptions() {
+        return cfDef.getCompaction_strategy_options();
+    }
+
+    @Override
+    public ColumnFamilyDefinition setRowCacheKeysToSave(int rowCacheKeysToSave) {
+        cfDef.setRow_cache_keys_to_save(rowCacheKeysToSave);
+        return this;
+    }
+
+    @Override
+    public int getRowCacheKeysToSave() {
+        return cfDef.getRow_cache_keys_to_save();
+    }
+
+    @Override
+    public ColumnFamilyDefinition setCompressionOptions(Map<String, String> compressionOptions) {
+        cfDef.setCompression_options(compressionOptions);
+        return this;
+    }
+
+    @Override
+    public Map<String, String> getCompressionOptions() {
+        return cfDef.getCompression_options();
+    }
+
 }

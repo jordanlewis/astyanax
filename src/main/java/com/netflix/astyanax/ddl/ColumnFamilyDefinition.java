@@ -17,6 +17,7 @@ package com.netflix.astyanax.ddl;
 
 import java.nio.ByteBuffer;
 import java.util.List;
+import java.util.Map;
 
 public interface ColumnFamilyDefinition {
 
@@ -25,22 +26,16 @@ public interface ColumnFamilyDefinition {
 	
 	ColumnFamilyDefinition setKeyspace(String keyspace);
 	String getKeyspace();
-	
-	ColumnFamilyDefinition setMemtableFlushAfterMins(int value);
-	int getMemtableFlushAfterMins();
-	
-	ColumnFamilyDefinition setMemtableOperationsInMillions(double value);
-	double getMemtableOperationsInMillions();
-	
-	ColumnFamilyDefinition setMemtableThroughputInMb(int value);
-	int getMemtableThroughputInMb();
-	
+
 	ColumnFamilyDefinition setMergeShardsChance(double value);
 	double getMergeShardsChance();
 	
 	ColumnFamilyDefinition setMinCompactionThreshold(int value);
 	int getMinCompactionThreshold();
-	
+
+	ColumnFamilyDefinition setMaxCompactionThreshold(int value);
+	int getMaxCompactionThreshold();
+
 	ColumnFamilyDefinition setName(String name);
 	String getName();
 	
@@ -79,7 +74,19 @@ public interface ColumnFamilyDefinition {
 	
 	ColumnFamilyDefinition setKeyValidationClass(String keyValidationClass);
 	String getKeyValidationClass();
-	
+
+    ColumnFamilyDefinition setCompactionStrategy(String compactionStrategy);
+    String getCompactionStrategy();
+
+    ColumnFamilyDefinition setCompactionStrategyOptions(Map<String, String> compactionStrategyOptions);
+    Map<String, String> getCompactionStrategyOptions();
+
+    ColumnFamilyDefinition setRowCacheKeysToSave(int rowCacheKeysToSave);
+    int getRowCacheKeysToSave();
+
+    ColumnFamilyDefinition setCompressionOptions(Map<String, String> compressionOptions);
+    Map<String, String> getCompressionOptions();
+
 	List<ColumnDefinition> getColumnDefinitionList();
 	ColumnFamilyDefinition addColumnDefinition(ColumnDefinition def);
 	

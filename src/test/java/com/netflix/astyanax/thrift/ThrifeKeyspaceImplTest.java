@@ -74,6 +74,7 @@ import com.netflix.astyanax.util.RangeBuilder;
 import com.netflix.astyanax.util.RecordReader;
 import com.netflix.astyanax.util.RecordWriter;
 import com.netflix.astyanax.util.TimeUUIDUtils;
+import org.junit.Ignore;
 
 public class ThrifeKeyspaceImplTest {
 
@@ -1342,7 +1343,8 @@ public class ThrifeKeyspaceImplTest {
 			Assert.fail();
 		}
 	}
-	
+
+	@Ignore
 	@Test
 	public void testCqlCount() {
 		try {
